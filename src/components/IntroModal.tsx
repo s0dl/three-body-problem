@@ -33,14 +33,14 @@ export default function IntroModal() {
         {/* Body */}
         <div className="space-y-4 text-white/60 text-sm leading-relaxed">
           <p>
-            In 1687, Newton solved the two-body problem — predicting the motion of any two objects under mutual gravity with perfect precision. The moment a third body enters the system, all predictability collapses.
+            In 1687, Newton solved the two-body problem, predicting the motion of any two objects under mutual gravity with perfect precision. The moment a third body enters the system, all predictability collapses.
           </p>
           <p>
             This is a real-time simulation of three stars under mutual gravitational attraction, inspired by Liu Cixin's <span className="text-white/80 italic">The Three-Body Problem</span>. Watch stable orbits slowly unravel into chaos.
           </p>
           <div className="border border-white/10 rounded-lg p-4 text-white/40 text-xs space-y-1">
             <p className="text-white/60 font-semibold mb-2">⚠ A note on accuracy</p>
-            <p>Many of the displayed units — AU distances, km/s velocities, elapsed years — are approximations based on normalized simulation units. The orbital shapes are physically correct. The numbers are illustrative.</p>
+            <p>Many of the displayed units (AU distances, km/s velocities, elapsed years) are approximations based on normalized simulation units. The orbital shapes are physically correct. The numbers are illustrative.</p>
           </div>
         </div>
 
