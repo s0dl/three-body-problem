@@ -1,4 +1,4 @@
-import { useRef, useCallback, useState } from 'react'
+import { useRef, useState } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { Line } from '@react-three/drei'
 import * as THREE from 'three'
@@ -10,27 +10,16 @@ interface TrailProps {
   color: string
   mass: number
   length?: number
-  trailKey: number
 }
 
-export default function BodyTrail({ bodyIndex, color, mass, length = 120, trailKey }: TrailProps) {
+export default function BodyTrail({ bodyIndex, color, mass, length = 120 }: TrailProps) {
   const points = useRef<THREE.Vector3[]>([])
-  const prevKey = useRef(trailKey)
-  const skipFrames = useRef(0)
-  const [visible, setVisible] = useState(false)
-  const [tick, setTick] = useState(0)
-
-  // Sync prevKey with trailKey on render — before useFrame runs
-  if (prevKey.current !== trailKey) {
-    points.current = []
-    prevKey.current = trailKey
-    skipFrames.current = 10
-  }
+  const skipFrames = useRef(10)
+  const [trailPoints, setTrailPoints] = useState<THREE.Vector3[]>([])
 
   useFrame(() => {
     if (skipFrames.current > 0) {
       skipFrames.current--
-      if (visible) setVisible(false)
       return
     }
 
@@ -41,14 +30,13 @@ export default function BodyTrail({ bodyIndex, color, mass, length = 120, trailK
     points.current.push(new THREE.Vector3(position[0], position[1], position[2]))
     if (points.current.length > length) points.current.shift()
 
-    if (!visible && points.current.length >= 2) setVisible(true)
-    if (visible) setTick(t => t + 1)
+    setTrailPoints([...points.current])
   })
 
-  if (!visible || points.current.length < 2) return null
+  if (trailPoints.length < 2) return null
 
-  const colors = points.current.map((_, i) => {
-    const t = i / points.current.length
+  const colors = trailPoints.map((_, i) => {
+    const t = i / trailPoints.length
     const c = new THREE.Color(color)
     c.multiplyScalar(t * t)
     return c
@@ -56,7 +44,7 @@ export default function BodyTrail({ bodyIndex, color, mass, length = 120, trailK
 
   return (
     <Line
-      points={[...points.current]}
+      points={trailPoints}
       vertexColors={colors}
       lineWidth={sunTrailWidth(mass)}
       transparent

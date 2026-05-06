@@ -300,10 +300,6 @@ describe('conservation laws', () => {
 
 describe('figure-8 solution', () => {
   const DT = 0.0001
-  // Figure-8 period is ~6.3 normalized time units
-  // At dt=0.0001: 6.3 / 0.0001 = 63000 steps per period
-  const ONE_PERIOD = 63000
-
   test('figure-8 bodies stay bounded for 1000 steps', () => {
     // Don't test periodicity — test boundedness over a known-good run
     const result = runSteps(FIGURE_8, 0.001, 5000)

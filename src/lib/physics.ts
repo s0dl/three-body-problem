@@ -33,8 +33,6 @@ function acceleration(bodies: BodyState[], i: number): [number, number, number] 
 
 // Single RK4 step for all bodies
 export function stepRK4(bodies: BodyState[], dt: number): BodyState[] {
-  const n = bodies.length
-
   // k1 - derivatives at current state
   const k1v = bodies.map((_, i) => acceleration(bodies, i))
   const k1x = bodies.map(b => b.velocity)

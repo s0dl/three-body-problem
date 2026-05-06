@@ -14,10 +14,14 @@ interface BodyProps {
   bodyIndex: number
   mass: number
   color: string
-  trailKey: number
 }
 
-export default function Body({ bodyIndex, mass, color, trailKey }: BodyProps) {
+function textureNoise(x: number, y: number, seed: number): number {
+  const value = Math.sin(x * 12.9898 + y * 78.233 + seed * 37.719) * 43758.5453
+  return value - Math.floor(value)
+}
+
+export default function Body({ bodyIndex, mass, color }: BodyProps) {
   const groupRef = useRef<THREE.Group>(null)
   const meshRef = useRef<THREE.Mesh>(null)
   const spriteRef = useRef<THREE.Sprite>(null)
@@ -57,10 +61,14 @@ export default function Body({ bodyIndex, mass, color, trailKey }: BodyProps) {
     const imageData = ctx.createImageData(size, size)
     const c = new THREE.Color()
     c.set(color)
+    const seed = c.r * 255 + c.g * 127 + c.b * 63
     for (let i = 0; i < size; i++) {
       for (let j = 0; j < size; j++) {
         const idx = (i * size + j) * 4
-        const noise = Math.random() * 0.5 + Math.random() * 0.3 + Math.random() * 0.2
+        const noise =
+          textureNoise(i, j, seed) * 0.5 +
+          textureNoise(i + 17, j + 31, seed) * 0.3 +
+          textureNoise(i + 43, j + 59, seed) * 0.2
         const brightness = 0.7 + noise * 0.5
         imageData.data[idx]     = Math.min(255, Math.floor(c.r * 255 * brightness))
         imageData.data[idx + 1] = Math.min(255, Math.floor(c.g * 255 * brightness))
