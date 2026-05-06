@@ -46,9 +46,9 @@ export default function IntroModal() {
 
         {/* Controls hint */}
         <div className="flex gap-4 mt-6 mb-8 text-white/30 text-xs">
-          <span>🖱 Drag to orbit</span>
-          <span>⚙ Scroll to zoom</span>
-          <span>⇧ Right-click to pan</span>
+          <span>Left-click and drag to orbit</span>
+          <span>Scroll to zoom</span>
+          <span>Right-click to pan</span>
         </div>
 
         {/* CTA */}
