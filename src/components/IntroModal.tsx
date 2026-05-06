@@ -27,7 +27,7 @@ export default function IntroModal() {
           The Three-Body Problem
         </h1>
         <p className="text-orange-400/80 text-xs uppercase tracking-widest mb-6">
-          Work in Progress
+          Real-time Newtonian simulation
         </p>
 
         {/* Body */}
@@ -36,7 +36,7 @@ export default function IntroModal() {
             In 1687, Newton solved the two-body problem, predicting the motion of any two objects under mutual gravity with perfect precision. The moment a third body enters the system, all predictability collapses.
           </p>
           <p>
-            This is a real-time simulation of three stars under mutual gravitational attraction, inspired by Liu Cixin's <span className="text-white/80 italic">The Three-Body Problem</span>. Watch stable orbits slowly unravel into chaos.
+            This is a real-time simulation of three stars under mutual gravitational attraction, inspired by Liu Cixin&apos;s <span className="text-white/80 italic">The Three-Body Problem</span>. Watch stable orbits slowly unravel into chaos.
           </p>
           <div className="border border-white/10 rounded-lg p-4 text-white/40 text-xs space-y-1">
             <p className="text-white/60 font-semibold mb-2">⚠ A note on accuracy</p>

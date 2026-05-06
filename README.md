@@ -2,7 +2,7 @@
 
 A real-time, interactive simulation of the three-body gravitational problem, inspired by Liu Cixin's *The Three-Body Problem* and the Trisolaran star system. Watch stable orbits slowly unravel into chaos.
 
-> **Work in Progress** — Many displayed units (AU distances, km/s velocities, elapsed years) are approximations based on normalized simulation units. The orbital shapes are physically correct for the most part. The numbers are illustrative.
+Many displayed units (AU distances, km/s velocities, elapsed years) are approximations based on normalized simulation units. The orbital motion is integrated from Newtonian gravity; the real-world labels are calibrated for readability.
 
 ---
 
@@ -10,7 +10,7 @@ A real-time, interactive simulation of the three-body gravitational problem, ins
 
 In 1687, Newton solved the two-body problem — predicting the motion of any two objects under mutual gravity with perfect precision. The moment a third body enters the system, all predictability collapses. There is no general closed-form solution. The system is chaotic by nature.
 
-This simulation lets you explore the different configurations — from rare periodic orbits like the figure-8 to eventual ejection - all emerging naturally from Newtonian gravity.
+This simulation lets you explore different configurations, from rare periodic orbits like the figure-8 to eventual ejection, all emerging naturally from Newtonian gravity.
 
 ---
 
@@ -21,9 +21,10 @@ This simulation lets you explore the different configurations — from rare peri
 - 3D space environment with full orbit, pan, and zoom controls
 - Orbital trails showing the paths carved through space
 - Three individualistic suns with distinct masses, sizes, colors, and light intensities
-- Time controls — slow down or speed up to 50× real time
+- Time controls — slow down or speed up to 100× real time
 - Astronomical unit display (AU, km/s, years)
 - Mass-luminosity relationship (L ∝ M³·⁵)
+- Unit tests covering physics invariants, solution validity, and display formatting
 
 ---
 
@@ -73,7 +74,7 @@ This simulation lets you explore the different configurations — from rare peri
 ### Installation
 
 ```bash
-git clone https://github.com/your-username/three-body-problem.git
+git clone https://github.com/s0dl/three-body-problem.git
 cd three-body-problem
 bun install
 ```
@@ -86,6 +87,15 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
+### Quality Checks
+
+```bash
+bun run lint
+bun run test
+bun run coverage
+bun run build
+```
+
 ---
 
 ## Controls
@@ -95,7 +105,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 | Left click + drag | Orbit around the system |
 | Scroll wheel | Zoom in / out |
 | Right click + drag | Pan |
-| Speed presets | ¼× · ½× · 1× · 5× · 10× · 50× |
+| Speed presets | ¼× · ½× · 1× · 5× · 10× · 50× · 100× |
 | Slider | Fine-grained time scale control |
 | Pause / Resume | Freeze the simulation |
 | Reset | Restart the current solution |
@@ -106,9 +116,9 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 The simulation uses **normalized units** where G = 1 and masses are in solar mass units. Displayed values are converted using the following calibration:
 
-- **1 normalized time unit ≈ 3.33 years** (derived from figure-8 period at simulation rate)
-- **1 normalized length unit ≈ 0.8 AU**
-- **1 normalized velocity unit ≈ 11.4 km/s**
+- **1 normalized time unit ≈ 3 years**
+- **1 normalized length unit ≈ 0.3 AU**
+- **1 normalized velocity unit ≈ 30 km/s**
 
 ---
 
